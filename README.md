@@ -1,51 +1,69 @@
-<h1>Implementing Pi-hole on a Synology NAS</h1>
+# Implementing Pi-hole on a Synology NAS
 
+## Project Overview
 
-<h2>Description</h2>
-Pi-hole is a DNS sinkhole used for blocking ad traffic. We'll use Pi-hole, via Docker on our Synology NAS, as our DNS server and then setup blocklists to known ad serer lists to significantly reduce the amount of advertisements we see around the web.
+Pi-hole is a powerful DNS sinkhole designed to block ad traffic across a network. By deploying Pi-hole on a Synology NAS via Docker, you can use it as your DNS server and significantly reduce the number of advertisements you encounter while browsing the web. This project focuses on configuring the necessary network settings, setting up the Pi-hole container, and adding blocklists to optimize the ad-blocking experience.
 
-First, we'll setup a Mac VLAN interface and a network bridge interface by connecting to our nas via SSH.
+## Detailed Description
 
-Then we'll download, configure, and initialize our Pi-hole container. We'll create environment variables including our admin account and it's password, along with pointing our container to our network bridge interface.
+### Key Components
 
-We can now start the container and access the Pi-hole GUI by navigating to our macvlan's IP and add several blocklists to Pi-hole to tune our web experience.
+1. **Synology NAS Setup**:
+   - **SSH Access**: Securely connect to the Synology NAS via SSH to perform network configurations.
+   - **Network Configuration**: Set up a macvlan interface for a dedicated IP address and a network bridge interface for seamless container communication.
 
-For this project we:
-<ul>
-  <li>Connect to our Synology NAS via SSh.</li>
-  <li>Create a macvlan and network bridge interface.</li>
-  <li>Create a resolve.conf file to add our nameservers.</li>
-  <li>Download the Pi-hole container Using Docker/Container Manager.</li>
-  <li>Initialize Pi-hole using our created bridge network.</li>
-  <li>Configure Pi-hole admin account and directories.</li>
-  <li>Add blocklists to Pi-hole to block advertisements.</li>
-</ul>
-<br />
+2. **Pi-hole Configuration**:
+   - **Docker Deployment**: Utilize Docker to download, configure, and initialize the Pi-hole container.
+   - **Environment Variables**: Establish environment variables for the admin account and network settings.
+   - **Blocklists**: Integrate known ad server lists into Pi-hole to enhance ad-blocking capabilities.
 
+### Process
 
-<h2>Platforms and Technologies Used</h2>
+#### Step 1: Connect to Synology NAS via SSH
 
-- <b>Synology NAS</b> 
-- <b>SSH</b>
-- <b>Pi-Hole</b>
-- <b>Terminal</b>
+1. **SSH Access**:
+   - Enable SSH on the Synology NAS and connect using an SSH client.
+   - Perform network configurations, including creating a macvlan and network bridge interface.
 
+#### Step 2: Configure Network Interfaces
 
-<h2>SSH into Synology</h2>
+1. **Macvlan Interface**:
+   - Create a macvlan interface to assign a dedicated IP address for Pi-hole.
 
-<p align="center">
-<img src="https://i.imgur.com/kopEyNp.jpeg" height="80%" width="80%"/>
-<br />
-  <h2>Creating macvlan interface:</h2>
+2. **Network Bridge Interface**:
+   - Set up a network bridge to facilitate communication between Docker containers and the NAS network.
 
-<p align="center">
-  <img src="https://i.imgur.com/c2YuI4R.jpeg" height="80%" width="80%"/>
-<br />  
-<h2>Creating a network bridge interface:</h2>
+3. **Resolve.conf File**:
+   - Configure the `resolve.conf` file to add nameservers for DNS resolution.
 
-<p align="center">
-  <img src="https://i.imgur.com/dnegpTp.jpeg" height="80%" width="80%"/>
-<br />
+#### Step 3: Download and Configure Pi-hole Container
+
+1. **Download Pi-hole**:
+   - Pull the Pi-hole Docker image from the repository.
+
+2. **Initialize Pi-hole Container**:
+   - Configure the Pi-hole container with environment variables, including admin account credentials and network settings.
+   - Ensure the container points to the network bridge interface.
+
+#### Step 4: Configure Pi-hole and Add Blocklists
+
+1. **Access Pi-hole GUI**:
+   - Access the Pi-hole graphical user interface (GUI) via the macvlan IP address.
+
+2. **Admin Account Configuration**:
+   - Log in to the Pi-hole GUI and configure the admin account settings.
+
+3. **Add Blocklists**:
+   - Add several blocklists to Pi-hole to effectively block advertisements.
+   - Fine-tune the blocklists to optimize the browsing experience.
+
+### Security Measures
+
+- **Account Management**: Disable default admin and guest accounts, and apply the principle of least privilege.
+- **Authentication**: Enable Adaptive Multi-Factor Authentication (AMFA) for all users.
+- **Access Control**: Restrict login attempts and enforce strong password policies.
+- **Data Protection**: Use snapshot replication to safeguard against ransomware attacks.
+
 <h2>Pi-hole running and blocking ads:</h2>
 
 <p align="center">
